@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        User
+          <ul class="foundUsers">
+          <% for(var i=0; i<foundUsers.length; i++) {%>
+            <li class="foundUsers">
+              <span><%= " Name: " + foundUsers[i].userName+" - "%></span>
+              <span><%=" Password: " + foundUsers[i].password%></span>
+            </li>
+          <% } %>
+        </ul>
+    <body>
+<html>
