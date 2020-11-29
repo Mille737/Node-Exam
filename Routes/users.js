@@ -1,3 +1,5 @@
+const router = require('express').Router();
+
 const MongoClient = require("mongodb").MongoClient;
 
 const connectionUrl = "mongodb://localhost:27017";
@@ -14,17 +16,14 @@ MongoClient.connect(connectionUrl, { useUnifiedTopology: true }, (error, client)
 
         console.log(foundUsers);
 
-        client.close();
+        router.get('/users',(req , res) =>{
+            level_1.find().toArray(function(err , i){
+                if (err) return console.log(err)
+
+                res.render('Level_1.ejs',{foundUsers: i})
+            })
+        });
     });
-
-    app.set('view engine', 'ejs');
-
-    app.get('/users',(req , res) =>{
-        db.collection('employees').find().toArray(function(err , i){
-            if (err) return console.log(err)
-
-            res.render('index.ejs',{employees: i})
-        })
-    });
-
 });
+
+module.exports = router;

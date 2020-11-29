@@ -5,7 +5,7 @@ const connectionUrl = "mongodb://localhost:27017";
 MongoClient.connect(connectionUrl, { useUnifiedTopology: true }, (error, client) => {
     if (error) throw new Error(error);
 
-    const users = client.db("users");
+    const users = client.db("users.js");
 
     const level_1 = users.collection("level_1");
 
