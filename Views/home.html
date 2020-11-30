@@ -6,6 +6,39 @@
     <title>Home</title>
 </head>
 <body>
-<div id="users">hello world</div>
+<h1>Login</h1>
+<form action="/login" method="POST">
+    <div>
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username">
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password">
+    </div>
+    <div>
+        <button type="submit">create</button>
+    </div>
+</form>
+<br>
+<a href="/register">Register here.</a>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/login",
+            data: JSON.stringify({username: username, password: password}),
+            headers: {"Content-Type": 'application/json'},
+            success: function (response) {
+                console.log('data', response)
+            },
+        })
+
+    });
+
+</script>
 </body>
 </html>
