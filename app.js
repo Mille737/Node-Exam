@@ -1,27 +1,31 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const cors = require('cors');
+const rateLimit = require("express-rate-limit");
+
 
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
 
-app.use(cors({credentials: true, origin: true, exposedHeaders: '*'}));
-app.use(function(req, res, next) {
-    res.header('Acces-Control-Allow-Origin', '*');
-    res.header('Acces-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    res.header('Acces-Control-Allow-Methods', 'POST, GET, PATCH, DELETE, OPTIONS');
-    next();
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100 // requests per windowMs
 });
+app.use(limiter);
 
 app.get("/", (req, res) => {
     return res.sendFile(__dirname + "/Views/home.html");
 });
+app.get("/register", (req, res) => {
+    return res.sendFile(__dirname + "/Views/register.html");
+});
 
 const usersRoutes = require("./Routes/users.js");
+const createUserRoutes = require("./Routes/createUsers.js");
 app.use(usersRoutes);
+app.use(createUserRoutes);
 
 const port = process.env.PORT || 8080;
 

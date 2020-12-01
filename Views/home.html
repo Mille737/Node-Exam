@@ -12,19 +12,21 @@
         <label for="username">Username:</label>
         <input type="text" name="username" id="username">
     </div>
+    <br>
     <div>
         <label for="password">Password:</label>
         <input type="password" name="password" id="password">
     </div>
+    <br>
     <div>
-        <button type="submit">create</button>
+        <button type="submit">Login</button>
     </div>
 </form>
 <br>
 <a href="/register">Register here.</a>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    $(document).ready(function() {
+    $("form").submit(function() {
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
         $.ajax({
@@ -36,9 +38,7 @@
                 console.log('data', response)
             },
         })
-
     });
-
 </script>
 </body>
 </html>

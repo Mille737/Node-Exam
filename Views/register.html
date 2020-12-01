@@ -7,8 +7,7 @@
 </head>
 <body>
 <h1>Register User</h1>
-<br>
-<form action="/register" method="POST">
+<form action="/confirmation" method="POST">
     <div>
         <label for="username">Username:</label>
         <input type="text" name="username" id="username">
@@ -25,5 +24,20 @@
 </form>
 <br>
 <a href="/">Already registered? click here</a>
+<script>
+    $("form").submit(function() {
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/",
+            data: JSON.stringify({username: username, password: password}),
+            headers: {"Content-Type": 'application/json'},
+            success: function (response) {
+                console.log('data', response)
+            },
+        })
+    });
+</script>
 </body>
 </html>
