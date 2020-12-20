@@ -1,14 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <title>Users</title>
+    <meta charset="UTF-8">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<html lang="en">
     <body>
-        User
-          <ul class="foundUsers">
-          <% for(var i=0; i<foundUsers.length; i++) {%>
-            <li class="foundUsers">
-              <span><%= " Name: " + foundUsers[i].userName+" - "%></span>
-              <span><%=" Password: " + foundUsers[i].password%></span>
-            </li>
-          <% } %>
-        </ul>
+    <div class="container">
+        <h1>User</h1>
+          <table class="foundUsers table table-striped table-bordered">
+              <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <% for(var i=0; i<foundUsers.length; i++) {%>
+                      <tr class="foundUsers">
+                          <td><%= foundUsers[i].userName%></td>
+                          <td>tb email</td>
+                          <td><%= foundUsers[i].password%></td>
+                      </tr>
+                  <% } %>
+              </tbody>
+        </table>
+    </div>
     <body>
 <html>

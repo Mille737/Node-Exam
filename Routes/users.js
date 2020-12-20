@@ -36,29 +36,19 @@ MongoClient.connect(connectionUrl, { useUnifiedTopology: true }, (error, client)
         });
     });
 
-    router.get('/secret', async (req , res) => {
-                try {
-                    await jwt.verify(req.query.token, SECRET);
-                } catch (e) {
-                    return res.status(401).json({
-                        title: 'Not Authenticated',
-                        message: "Token couldn't be identified",
-                    });
-                }
-                return res.sendFile(path.resolve("Views/secret.html"));
-            });
-
     router.post('/login', (req, res) => {
         try {
             level_1.findOne({ userName: req.body.username }).then((user) => {
-                if (!user) return res.status(400).send("Username doesn't exist");
-                console.log(req.body.password + " : " + user.password);
-                const validPass = bcrypt.compare(req.body.password, user.password);
-                if (!validPass) return res.status(400).send('Invalid password');
-
-                const token = jwt.sign({username: req.body.username}, SECRET);
-                //res.send("<a href='http://localhost:8080/user?token=%s'></a>", token);
-                return res.status('200').json([{ "http://localhost:8080/user?token=" : token }, { "http://localhost:8080/secret?token=" : token }]);
+                if (!user) return res.status(400).send("User not exist");
+                bcrypt.compare(req.body.password, user.password, (err, data) => {
+                    if (err) throw err;
+                    if (data) {
+                        const token = jwt.sign({username: req.body.username}, SECRET);
+                        return res.status('200').json([{ "http://localhost:8080/users?token=" : token }]);
+                    } else {
+                        return res.status(401).send("Invalid password");
+                    }
+                });
             });
         } catch (err) {
             console.log("Error occured: " + err);
