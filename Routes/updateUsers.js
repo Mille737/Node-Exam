@@ -17,7 +17,6 @@ MongoClient.connect(connectionUrl, { useUnifiedTopology: true },function(err, cl
                 const newValues = {$set: {userName: req.body.username, password: hash, email: req.body.email}};
                 level_1.updateOne({userName: req.body.oldUsername}, newValues, function (err, success) {
                     if (err) throw err;
-                    console.log(JSON.stringify(success.result));
                     return res.send(success).status(200);
                 });
             });

@@ -11,7 +11,6 @@ MongoClient.connect(connectionUrl, { useUnifiedTopology: true }, (error, client)
         try {
             level_1.deleteOne({userName: req.body.username}, function (error, success) {
                 if (error) throw error;
-                console.log(JSON.stringify(success.result));
                 return res.status(200).send(success);
             });
         } catch (err) {

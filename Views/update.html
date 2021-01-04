@@ -53,8 +53,8 @@
                 headers: {"Content-Type": 'application/json'},
                 success: function (response) {
                     console.log('data', response);
-                    window.location.replace("http://localhost:8080/users");
-                },
+                    const token = localStorage.getItem('token');
+                    window.location.replace("http://localhost:8080/users?token=" + token);                },
             });
         });
     </script>

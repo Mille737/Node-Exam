@@ -14,7 +14,6 @@ MongoClient.connect(connectionUrl, {useUnifiedTopology: true}, (error, client) =
     const level_1 = users.collection("level_1");
 
     router.post("/register", (req, res) => {
-        console.log("here3", req.body);
         try {
             level_1.findOne({ userName: req.body.username }).then((user) => {
                 if (user) return res.status(409).send("Username already exist");

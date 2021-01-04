@@ -16,9 +16,6 @@ MongoClient.connect(connectionUrl, { useUnifiedTopology: true }, (error, client)
 
     level_1.find().toArray((error, foundUsers) => {
         if (error) throw new Error(error);
-
-        console.log(foundUsers);
-
         router.get('/users', async (req , res) => {
             try {
                 await jwt.verify(req.query.token, SECRET);
@@ -44,7 +41,7 @@ MongoClient.connect(connectionUrl, { useUnifiedTopology: true }, (error, client)
                     if (err) throw err;
                     if (data) {
                         const token = jwt.sign({username: req.body.username}, SECRET);
-                        return res.status(200).json([{ "http://localhost:8080/users?token=" : token }]);
+                        return res.status(200).send(token);
                     } else {
                         return res.status(401).send("Invalid password");
                     }
