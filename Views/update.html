@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Register</title>
+    <title>Update</title>
     <meta charset="UTF-8">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -12,44 +12,48 @@
 </head>
 <body>
     <div class="container">
-        <h1>Register User</h1>
+        <h1>Update User</h1>
         <form>
             <div class="input-group col-xs-3">
+                <label class="input-group-addon" for="oldUsername"><div class="glyphicon glyphicon-user"></div></label>
+                <input class="form-control" type="text" name="oldUsername" id="oldUsername" placeholder="Old Username">
+            </div>
+            <br>
+            <div class="input-group col-xs-3">
                 <label class="input-group-addon" for="username"><div class="glyphicon glyphicon-user"></div></label>
-                <input class="form-control" type="text" name="username" id="username" placeholder="Username">
+                <input class="form-control" type="text" name="username" id="username" placeholder="New Username">
             </div>
             <br>
             <div class="input-group col-xs-3">
                 <label class="input-group-addon" for="email"><div class="glyphicon glyphicon-envelope"></div></label>
-                <input class="form-control" type="email" name="email" id="email" placeholder="Email">
+                <input class="form-control" type="email" name="email" id="email" placeholder="New Email">
             </div>
             <br>
             <div class="input-group col-xs-3">
                 <label class="input-group-addon" for="password"><div class="glyphicon glyphicon-lock"></div></label>
-                <input class="form-control" type="password" name="password" id="password" placeholder="Password">
+                <input class="form-control" type="password" name="password" id="password" placeholder="New Password">
             </div>
             <br>
             <div>
-                <button class="btn btn-success" type="submit">Create</button>
+                <button class="btn btn-success" type="submit">Update</button>
             </div>
         </form>
-        <br>
-        <a href="/">Already registered? click here</a>
     </div>
     <script>
         $("form").submit(function(e) {
             e.preventDefault();
+            const oldUsername = document.getElementById("oldUsername").value;
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
             const email = document.getElementById("email").value;
             $.ajax({
-                type: "POST",
-                url: "http://localhost:8080/register",
-                data: JSON.stringify({username: username, password: password, email: email}),
+                type: "PUT",
+                url: "http://localhost:8080/updated",
+                data: JSON.stringify({oldUsername: oldUsername, username: username, password: password, email: email}),
                 headers: {"Content-Type": 'application/json'},
                 success: function (response) {
                     console.log('data', response);
-                    window.location.push("http://localhost:8080/confirmation");
+                    window.location.replace("http://localhost:8080/users");
                 },
             });
         });

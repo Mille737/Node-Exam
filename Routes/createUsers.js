@@ -13,16 +13,16 @@ MongoClient.connect(connectionUrl, {useUnifiedTopology: true}, (error, client) =
     const users = client.db("users");
     const level_1 = users.collection("level_1");
 
-    router.post("/confirmation", (req, res) => {
+    router.post("/register", (req, res) => {
+        console.log("here3", req.body);
         try {
             level_1.findOne({ userName: req.body.username }).then((user) => {
                 if (user) return res.status(409).send("Username already exist");
                 bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
-                    level_1.insertOne({userName: req.body.username, password: hash}, (error, result) => {
+                    level_1.insertOne({userName: req.body.username, password: hash, email: req.body.email}, (error, result) => {
                         if (error) throw new Error(error);
                         mail.sendMail();
-                        console.log(result);
-                        return res.sendFile(path.resolve("Views/confirmation.html"));
+                        return res.status(200).send(result);
                     });
                 });
             });

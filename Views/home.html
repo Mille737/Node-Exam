@@ -14,7 +14,7 @@
 <body>
 <div class="container">
     <h1>Login</h1>
-    <form action="/login" method="POST">
+    <form>
         <div class="input-group col-xs-3">
             <label class="input-group-addon" for="username"><div class="glyphicon glyphicon-user"></div></label>
             <input class="form-control" type="text" name="username" id="username" placeholder="Username">
@@ -34,7 +34,8 @@
 </div>
 
 <script>
-    $("form").submit(function() {
+    $("form").submit(function(e) {
+        e.preventDefault();
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
         $.ajax({
@@ -43,9 +44,10 @@
             data: JSON.stringify({username: username, password: password}),
             headers: {"Content-Type": 'application/json'},
             success: function (response) {
-                console.log('data', response)
+                localStorage.setItem('token', response.token);
+                console.log('data', response);
             },
-        })
+        });
     });
 </script>
 </body>
