@@ -2,6 +2,10 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const rateLimit = require("express-rate-limit");
+const socketIO = require('socket.io');
+const http = require('http');
+const server = http.createServer(app);
+const io = socketIO(server);
 
 
 app.use(bodyParser.urlencoded({
@@ -37,9 +41,19 @@ app.use(createUserRoutes);
 app.use(updateUserRoutes);
 app.use(deleteUserRoutes);
 
+io.on("connection", (socket)=>{
+    socket.on('createMessage', (newMessage)=>{
+        console.log('newMessage', newMessage);
+        socket.emit('newMessage', {
+            from:'Server',
+            text: newMessage.username + ' login accepted.'
+        });
+    });
+});
+
 const port = process.env.PORT || 8080;
 
-app.listen(port, (error) => {
+server.listen(port, (error) => {
     if (error) {
         console.log("Server couldn't start :( ", error);
     }

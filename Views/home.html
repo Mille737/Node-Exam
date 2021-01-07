@@ -12,44 +12,70 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="container">
-    <h1>Login</h1>
-    <form>
-        <div class="input-group col-xs-3">
-            <label class="input-group-addon" for="username"><div class="glyphicon glyphicon-user"></div></label>
-            <input class="form-control" type="text" name="username" id="username" placeholder="Username">
-        </div>
+    <div class="container">
+        <h1>Login</h1>
+        <form>
+            <div class="input-group col-xs-3">
+                <label class="input-group-addon" for="username"><div class="glyphicon glyphicon-user"></div></label>
+                <input class="form-control" type="text" name="username" id="username" placeholder="Username">
+            </div>
+            <br>
+            <div class="input-group col-xs-3">
+                <label class="input-group-addon" for="password"><div class="glyphicon glyphicon-lock"></div></label>
+                <input class="form-control" type="password" name="password" id="password" placeholder="Password">
+            </div>
+            <br>
+            <div>
+                <button class="btn btn-success" type="submit">Login</button>
+            </div>
+        </form>
         <br>
-        <div class="input-group col-xs-3">
-            <label class="input-group-addon" for="password"><div class="glyphicon glyphicon-lock"></div></label>
-            <input class="form-control" type="password" name="password" id="password" placeholder="Password">
-        </div>
-        <br>
-        <div>
-            <button class="btn btn-success" type="submit">Login</button>
-        </div>
-    </form>
-    <br>
-    <a href="/register">Register here.</a>
-</div>
-
-<script>
-    $("form").submit(function(e) {
-        e.preventDefault();
-        const username = document.getElementById("username").value;
-        const password = document.getElementById("password").value;
-        $.ajax({
-            type: "POST",
-            url: "http://localhost:8080/login",
-            data: JSON.stringify({username: username, password: password}),
-            headers: {"Content-Type": 'application/json'},
-            success: function (response) {
-                console.log('data', response);
-                localStorage.setItem('token', response);
-                window.location.replace("http://localhost:8080/users?token=" + response);
-            },
+        <a href="/register">Register here.</a>
+    </div>
+    <script>
+        $("form").submit(function(e) {
+            e.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/login",
+                data: JSON.stringify({username: username, password: password}),
+                headers: {"Content-Type": 'application/json'},
+                success: function (response) {
+                    console.log('data', response);
+                    userLoggedIn();
+                    localStorage.setItem('token', response);
+                    window.location.href = ("http://localhost:8080/users?token=" + response);
+                },
+                statusCode: {
+                    400: function() {
+                        alert("Username does not exists");
+                    },
+                    401: function() {
+                        alert("Invalid password");
+                    }
+                }
+            });
         });
-    });
-</script>
+    </script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        socket.on('connect', function() {
+            console.log('Connected to Server');
+        });
+        function userLoggedIn() {
+            const username = document.getElementById("username").value;
+            socket.emit('createMessage', {
+                to:'server',
+                username: username,
+                text: username + ' has been logged in.'
+            });
+        }
+        socket.on('newMessage', function(message){
+            console.log(message);
+        });
+    </script>
 </body>
 </html>

@@ -54,7 +54,7 @@
                 success: function (response) {
                     console.log('data', response);
                     const token = localStorage.getItem('token');
-                    window.location.replace("http://localhost:8080/users?token=" + token);                },
+                    window.location.href = ("http://localhost:8080/users?token=" + token);                },
             });
         });
     </script>

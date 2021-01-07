@@ -36,7 +36,7 @@ MongoClient.connect(connectionUrl, { useUnifiedTopology: true }, (error, client)
     router.post('/login', (req, res) => {
         try {
             level_1.findOne({ userName: req.body.username }).then((user) => {
-                if (!user) return res.status(400).send("User not exist");
+                if (!user) return res.status(400).send("Username does not exists");
                 bcrypt.compare(req.body.password, user.password, (err, data) => {
                     if (err) throw err;
                     if (data) {

@@ -49,8 +49,13 @@
                 headers: {"Content-Type": 'application/json'},
                 success: function (response) {
                     console.log('data', response);
-                    window.location.push("http://localhost:8080/confirmation");
+                    window.location.href = "http://localhost:8080/confirmation";
                 },
+                statusCode: {
+                    409: function() {
+                        alert( "Username already exists" );
+                    }
+                }
             });
         });
     </script>
