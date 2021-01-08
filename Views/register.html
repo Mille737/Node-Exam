@@ -44,12 +44,12 @@
             const email = document.getElementById("email").value;
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8080/register",
+                url: "https://node-exam-camille.herokuapp.com/register",
                 data: JSON.stringify({username: username, password: password, email: email}),
                 headers: {"Content-Type": 'application/json'},
                 success: function (response) {
                     console.log('data', response);
-                    window.location.href = "http://localhost:8080/confirmation";
+                    window.location.href = "https://node-exam-camille.herokuapp.com/confirmation";
                 },
                 statusCode: {
                     409: function() {

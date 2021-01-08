@@ -35,7 +35,7 @@
                             const username = ("<%=foundUsers[i].userName%>");
                             $.ajax({
                                 type: "DELETE",
-                                url: "http://localhost:8080/delete",
+                                url: "https://node-exam-camille.herokuapp.com/delete",
                                 data: JSON.stringify({username: username}),
                                 headers: {"Content-Type": 'application/json'},
                                 success: function (response) {

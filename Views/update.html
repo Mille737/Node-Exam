@@ -48,13 +48,13 @@
             const email = document.getElementById("email").value;
             $.ajax({
                 type: "PUT",
-                url: "http://localhost:8080/updated",
+                url: "https://node-exam-camille.herokuapp.com/updated",
                 data: JSON.stringify({oldUsername: oldUsername, username: username, password: password, email: email}),
                 headers: {"Content-Type": 'application/json'},
                 success: function (response) {
                     console.log('data', response);
                     const token = localStorage.getItem('token');
-                    window.location.href = ("http://localhost:8080/users?token=" + token);                },
+                    window.location.href = ("https://node-exam-camille.herokuapp.com/users?token=" + token);                },
             });
         });
     </script>

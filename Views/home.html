@@ -39,14 +39,14 @@
             const password = document.getElementById("password").value;
             $.ajax({
                 type: "POST",
-                url: "http://localhost:8080/login",
+                url: "https://node-exam-camille.herokuapp.com/login",
                 data: JSON.stringify({username: username, password: password}),
                 headers: {"Content-Type": 'application/json'},
                 success: function (response) {
                     console.log('data', response);
                     userLoggedIn();
                     localStorage.setItem('token', response);
-                    window.location.href = ("http://localhost:8080/users?token=" + response);
+                    window.location.href = ("https://node-exam-camille.herokuapp.com/users?token=" + response);
                 },
                 statusCode: {
                     400: function() {
