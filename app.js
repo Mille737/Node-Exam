@@ -20,16 +20,16 @@ const limiter = rateLimit({
 app.use(limiter);
 
 app.get("/", (req, res) => {
-    return res.sendFile(__dirname + "/Views/home.html");
+    return res.sendFile(__dirname + "/views/home.html");
 });
 app.get("/register", (req, res) => {
-    return res.sendFile(__dirname + "/Views/register.html");
+    return res.sendFile(__dirname + "/views/register.html");
 });
 app.get("/confirmation", (req, res) => {
-    return res.sendFile(__dirname + "/Views/confirmation.html");
+    return res.sendFile(__dirname + "/views/confirmation.html");
 });
 app.get("/update", (req, res) => {
-    return res.sendFile(__dirname + "/Views/update.html");
+    return res.sendFile(__dirname + "/views/update.html");
 });
 
 const usersRoutes = require("./Routes/users.js");
