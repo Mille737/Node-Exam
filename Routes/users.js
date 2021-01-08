@@ -9,7 +9,7 @@ const connectionUrl = "mongodb+srv://admin:admin@cluster0.ns182.mongodb.net/user
 const SECRET = 'THISISASECRET';
 
 MongoClient.connect(connectionUrl, {useNewUrlParser: true, useUnifiedTopology: true}, (error, client) => {
-    if (error) throw new Error(error);
+    if (error) throw error;
 
     const users = client.db("users");
     const level_1 = users.collection("level_1");

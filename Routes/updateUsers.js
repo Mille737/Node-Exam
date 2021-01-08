@@ -7,7 +7,7 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 MongoClient.connect(connectionUrl, {useNewUrlParser: true, useUnifiedTopology: true}, (error, client) => {
-    if (err) throw err;
+    if (error) throw error;
     const users = client.db("users");
     const level_1 = users.collection("level_1");
 
