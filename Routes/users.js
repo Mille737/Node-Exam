@@ -4,11 +4,11 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const MongoClient = require("mongodb").MongoClient;
-const connectionUrl = "mongodb://localhost:27017";
+const connectionUrl = "mongodb+srv://admin:admin@cluster0.ns182.mongodb.net/users?retryWrites=true&w=majority";
 
 const SECRET = 'THISISASECRET';
 
-MongoClient.connect(connectionUrl, { useUnifiedTopology: true }, (error, client) => {
+MongoClient.connect(connectionUrl, {useNewUrlParser: true, useUnifiedTopology: true}, (error, client) => {
     if (error) throw new Error(error);
 
     const users = client.db("users");

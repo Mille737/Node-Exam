@@ -1,9 +1,9 @@
 const router = require('express').Router();
 
 const MongoClient = require("mongodb").MongoClient;
-const connectionUrl = "mongodb://localhost:27017";
+const connectionUrl = "mongodb+srv://admin:admin@cluster0.ns182.mongodb.net/users?retryWrites=true&w=majority";
 
-MongoClient.connect(connectionUrl, { useUnifiedTopology: true }, (error, client) => {
+MongoClient.connect(connectionUrl, {useNewUrlParser: true, useUnifiedTopology: true}, (error, client) => {
     if (error) throw error;
     const users = client.db("users");
     const level_1 = users.collection("level_1");
