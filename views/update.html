@@ -54,7 +54,13 @@
             success: function (response) {
                 console.log('data', response);
                 const token = localStorage.getItem('token');
-                window.location.href = ("https://node-exam-camille.herokuapp.com/users?token=" + token);                },
+                window.location.href = ("https://node-exam-camille.herokuapp.com/users?token=" + token);
+            },
+            statusCode: {
+                409: function() {
+                    alert( "Username already exists" );
+                }
+            }
         });
     });
 </script>
