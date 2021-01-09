@@ -37,8 +37,8 @@ MongoClient.connect(connectionUrl, {useNewUrlParser: true, useUnifiedTopology: t
         try {
             level_1.findOne({ userName: req.body.username }).then((user) => {
                 if (!user) return res.status(400).send("Username does not exists");
-                bcrypt.compare(req.body.password, user.password, (err, data) => {
-                    if (err) throw err;
+                bcrypt.compare(req.body.password, user.password, (error, data) => {
+                    if (err) throw error;
                     if (data) {
                         const token = jwt.sign({username: req.body.username}, SECRET);
                         return res.status(200).send(token);
@@ -47,8 +47,8 @@ MongoClient.connect(connectionUrl, {useNewUrlParser: true, useUnifiedTopology: t
                     }
                 });
             });
-        } catch (err) {
-            console.log("Error occured: " + err);
+        } catch (error) {
+            console.log("Error occured: " + error);
         }
     });
 });

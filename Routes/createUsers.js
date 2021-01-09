@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const path = require("path");
+
 const mail = require("../mail.js");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;

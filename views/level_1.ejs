@@ -11,44 +11,44 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Users</h1>
-        <table class="foundUsers table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Password</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <% for(let i=0; i<foundUsers.length; i++) {%>
-                    <tr class="foundUsers">
-                        <td id="username-<%=foundUsers[i].userName%>"><%= foundUsers[i].userName%></td>
-                        <td><%= foundUsers[i].email%></td>
-                        <td><%= foundUsers[i].password%></td>
-                        <td><button class="btn btn-danger" id="button-<%=foundUsers[i].userName%>">Delete</button></td>
-                    </tr>
-                    <script>
-                        $("#button-<%=foundUsers[i].userName%>").click(function() {
-                            const username = ("<%=foundUsers[i].userName%>");
-                            $.ajax({
-                                type: "DELETE",
-                                url: "https://node-exam-camille.herokuapp.com/delete",
-                                data: JSON.stringify({username: username}),
-                                headers: {"Content-Type": 'application/json'},
-                                success: function (response) {
-                                    console.log('data', response);
-                                    location.reload();
-                                },
-                            });
-                        });
-                    </script>
-                <% } %>
-            </tbody>
-        </table>
-        <button class="btn btn-primary" onClick="window.location='update'">Update user information here</button>
-    </div>
+<div class="container">
+    <h1>Users</h1>
+    <table class="foundUsers table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for(let i=0; i<foundUsers.length; i++) {%>
+        <tr class="foundUsers">
+            <td id="username-<%=foundUsers[i].userName%>"><%= foundUsers[i].userName%></td>
+            <td><%= foundUsers[i].email%></td>
+            <td><%= foundUsers[i].password%></td>
+            <td><button class="btn btn-danger" id="button-<%=foundUsers[i].userName%>">Delete</button></td>
+        </tr>
+        <script>
+            $("#button-<%=foundUsers[i].userName%>").click(function() {
+                const username = ("<%=foundUsers[i].userName%>");
+                $.ajax({
+                    type: "DELETE",
+                    url: "https://node-exam-camille.herokuapp.com/delete",
+                    data: JSON.stringify({username: username}),
+                    headers: {"Content-Type": 'application/json'},
+                    success: function (response) {
+                        console.log('data', response);
+                        location.reload();
+                    },
+                });
+            });
+        </script>
+        <% } %>
+        </tbody>
+    </table>
+    <button class="btn btn-primary" onClick="window.location='update'">Update user information here</button>
+</div>
 </body>
 </html>

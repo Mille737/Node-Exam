@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+
 const bodyParser = require('body-parser');
 const rateLimit = require("express-rate-limit");
 const socketIO = require('socket.io');
@@ -41,8 +42,8 @@ app.use(createUserRoutes);
 app.use(updateUserRoutes);
 app.use(deleteUserRoutes);
 
-io.on("connection", (socket)=>{
-    socket.on('createMessage', (newMessage)=>{
+io.on("connection", (socket) => {
+    socket.on('createMessage', (newMessage) => {
         console.log('newMessage', newMessage);
         socket.emit('newMessage', {
             from:'Server',

@@ -22,8 +22,7 @@ async function sendMail() {
     });
 
     console.log("Message sent: %s", info.messageId);
-
     console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 }
 
-module.exports = {sendMail}
+module.exports = {sendMail};
