@@ -17,7 +17,7 @@ MongoClient.connect(connectionUrl, {useNewUrlParser: true, useUnifiedTopology: t
         try {
             level_1.findOne({ userName: req.body.username }).then((user) => {
                 if (user) return res.status(409).send("Username already exists");
-                bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+                bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
                     level_1.insertOne({userName: req.body.username, password: hash, email: req.body.email}, (error, result) => {
                         if (error) throw new Error(error);
                         mail.sendMail();

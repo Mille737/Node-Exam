@@ -33,10 +33,10 @@ app.get("/update", (req, res) => {
     return res.sendFile(__dirname + "/views/update.html");
 });
 
-const usersRoutes = require("./Routes/users.js");
-const createUserRoutes = require("./Routes/createUsers.js");
-const updateUserRoutes = require("./Routes/updateUsers.js");
-const deleteUserRoutes = require("./Routes/deleteUser.js");
+const usersRoutes = require("./routes/users.js");
+const createUserRoutes = require("./routes/createUsers.js");
+const updateUserRoutes = require("./routes/updateUsers.js");
+const deleteUserRoutes = require("./routes/deleteUser.js");
 app.use(usersRoutes);
 app.use(createUserRoutes);
 app.use(updateUserRoutes);
@@ -58,5 +58,5 @@ server.listen(port, (error) => {
     if (error) {
         console.log("Server couldn't start :( ", error);
     }
-    console.log("Server started on port", Number(port));
+    console.log("Server started on port", port);
 });

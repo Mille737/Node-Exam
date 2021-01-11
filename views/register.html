@@ -11,53 +11,53 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="container">
-    <h1>Register User</h1>
-    <form>
-        <div class="input-group col-xs-3">
-            <label class="input-group-addon" for="username"><div class="glyphicon glyphicon-user"></div></label>
-            <input class="form-control" type="text" name="username" id="username" placeholder="Username">
-        </div>
+    <div class="container">
+        <h1>Register User</h1>
+        <form>
+            <div class="input-group col-xs-3">
+                <label class="input-group-addon" for="username"><span class="glyphicon glyphicon-user"></span></label>
+                <input class="form-control" type="text" name="username" id="username" placeholder="Username" required>
+            </div>
+            <br>
+            <div class="input-group col-xs-3">
+                <label class="input-group-addon" for="email"><span class="glyphicon glyphicon-envelope"></span></label>
+                <input class="form-control" type="email" name="email" id="email" placeholder="Email" required>
+            </div>
+            <br>
+            <div class="input-group col-xs-3">
+                <label class="input-group-addon" for="password"><span class="glyphicon glyphicon-lock"></span></label>
+                <input class="form-control" type="password" name="password" id="password" placeholder="Password" required>
+            </div>
+            <br>
+            <div>
+                <button class="btn btn-success" type="submit">Create</button>
+            </div>
+        </form>
         <br>
-        <div class="input-group col-xs-3">
-            <label class="input-group-addon" for="email"><div class="glyphicon glyphicon-envelope"></div></label>
-            <input class="form-control" type="email" name="email" id="email" placeholder="Email">
-        </div>
-        <br>
-        <div class="input-group col-xs-3">
-            <label class="input-group-addon" for="password"><div class="glyphicon glyphicon-lock"></div></label>
-            <input class="form-control" type="password" name="password" id="password" placeholder="Password">
-        </div>
-        <br>
-        <div>
-            <button class="btn btn-success" type="submit">Create</button>
-        </div>
-    </form>
-    <br>
-    <a href="/">Already registered? click here</a>
-</div>
-<script>
-    $("form").submit(function(e) {
-        e.preventDefault();
-        const username = document.getElementById("username").value;
-        const password = document.getElementById("password").value;
-        const email = document.getElementById("email").value;
-        $.ajax({
-            type: "POST",
-            url: "https://node-exam-camille.herokuapp.com/register",
-            data: JSON.stringify({username: username, password: password, email: email}),
-            headers: {"Content-Type": 'application/json'},
-            success: function (response) {
-                console.log('data', response);
-                window.location.href = "https://node-exam-camille.herokuapp.com/confirmation";
-            },
-            statusCode: {
-                409: function() {
-                    alert( "Username already exists" );
+        <a href="/">Already registered? click here</a>
+    </div>
+    <script>
+        $("form").submit(function(e) {
+            e.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const email = document.getElementById("email").value;
+            $.ajax({
+                type: "POST",
+                url: "https://node-exam-camille.herokuapp.com/register",
+                data: JSON.stringify({username: username, password: password, email: email}),
+                headers: {"Content-Type": 'application/json'},
+                success: function (response) {
+                    console.log('data', response);
+                    window.location.href = "https://node-exam-camille.herokuapp.com/confirmation";
+                },
+                statusCode: {
+                    409: function() {
+                        alert( "Username already exists" );
+                    }
                 }
-            }
+            });
         });
-    });
-</script>
+    </script>
 </body>
 </html>
