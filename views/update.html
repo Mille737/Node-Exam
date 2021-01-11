@@ -40,7 +40,7 @@
         </form>
     </div>
     <script>
-        $("form").submit(function(e) {
+        $("form").submit((e) => {
             e.preventDefault();
             const oldUsername = document.getElementById("oldUsername").value;
             const username = document.getElementById("username").value;
@@ -51,13 +51,13 @@
                 url: "https://node-exam-camille.herokuapp.com/updated",
                 data: JSON.stringify({oldUsername: oldUsername, username: username, password: password, email: email}),
                 headers: {"Content-Type": 'application/json'},
-                success: function (response) {
+                success: (response) => {
                     console.log('data', response);
                     const token = localStorage.getItem('token');
                     window.location.href = ("https://node-exam-camille.herokuapp.com/users?token=" + token);
                 },
                 statusCode: {
-                    409: function() {
+                    409: () => {
                         alert( "Username already exists" );
                     }
                 }

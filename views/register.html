@@ -37,7 +37,7 @@
         <a href="/">Already registered? click here</a>
     </div>
     <script>
-        $("form").submit(function(e) {
+        $("form").submit((e) => {
             e.preventDefault();
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
@@ -47,12 +47,12 @@
                 url: "https://node-exam-camille.herokuapp.com/register",
                 data: JSON.stringify({username: username, password: password, email: email}),
                 headers: {"Content-Type": 'application/json'},
-                success: function (response) {
+                success: (response) => {
                     console.log('data', response);
                     window.location.href = "https://node-exam-camille.herokuapp.com/confirmation";
                 },
                 statusCode: {
-                    409: function() {
+                    409: () => {
                         alert( "Username already exists" );
                     }
                 }

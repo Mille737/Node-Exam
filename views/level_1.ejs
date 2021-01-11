@@ -31,14 +31,14 @@
                     <td><button class="btn btn-danger" id="button-<%=foundUsers[i].userName%>">Delete</button></td>
                 </tr>
                 <script>
-                    $("#button-<%=foundUsers[i].userName%>").click(function() {
+                    $("#button-<%=foundUsers[i].userName%>").click(() => {
                         const username = ("<%=foundUsers[i].userName%>");
                         $.ajax({
                             type: "DELETE",
                             url: "https://node-exam-camille.herokuapp.com/delete",
                             data: JSON.stringify({username: username}),
                             headers: {"Content-Type": 'application/json'},
-                            success: function (response) {
+                            success: (response) => {
                                 console.log('data', response);
                                 location.reload();
                             },

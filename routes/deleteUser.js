@@ -11,7 +11,7 @@ MongoClient.connect(connectionUrl, {useNewUrlParser: true, useUnifiedTopology: t
 
     router.delete("/delete", (req, res) => {
         try {
-            level_1.deleteOne({userName: req.body.username}, function (error, success) {
+            level_1.deleteOne({userName: req.body.username}, (error, success) => {
                 if (error) throw error;
                 return res.status(200).send(success);
             });

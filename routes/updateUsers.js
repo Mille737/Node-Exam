@@ -16,9 +16,9 @@ MongoClient.connect(connectionUrl, {useNewUrlParser: true, useUnifiedTopology: t
         try {
             level_1.findOne({ userName: req.body.username }).then((user) => {
                 if (user) return res.status(409).send("Username already exists");
-                bcrypt.hash(req.body.password, saltRounds, function (error, hash) {
+                bcrypt.hash(req.body.password, saltRounds, (error, hash) => {
                     const newValues = {$set: {userName: req.body.username, password: hash, email: req.body.email}};
-                    level_1.updateOne({userName: req.body.oldUsername}, newValues, function (error, success) {
+                    level_1.updateOne({userName: req.body.oldUsername}, newValues,  (error, success) => {
                         if (error) throw error;
                         return res.send(success).status(200);
                     });

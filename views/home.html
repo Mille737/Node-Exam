@@ -33,7 +33,7 @@
         <a href="/register">Register here.</a>
     </div>
     <script>
-        $("form").submit(function(e) {
+        $("form").submit((e) => {
             e.preventDefault();
             const username = $("#username").val();
             const password = $("#password").val();
@@ -42,17 +42,17 @@
                 url: "https://node-exam-camille.herokuapp.com/login",
                 data: JSON.stringify({username: username, password: password}),
                 headers: {"Content-Type": 'application/json'},
-                success: function (response) {
+                success: (response) => {
                     console.log('data', response);
                     userLoggedIn();
                     localStorage.setItem('token', response);
                     window.location.href = ("https://node-exam-camille.herokuapp.com/users?token=" + response);
                 },
                 statusCode: {
-                    400: function() {
+                    400: () => {
                         alert("Username does not exists");
                     },
-                    401: function() {
+                    401: () => {
                         alert("Invalid password");
                     }
                 }
@@ -62,10 +62,10 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
         const socket = io();
-        socket.on('connect', function() {
+        socket.on('connect', () => {
             console.log('Connected to Server');
         });
-        function userLoggedIn() {
+        const userLoggedIn = () => {
             const username = document.getElementById("username").value;
             socket.emit('createMessage', {
                 to:'server',
@@ -73,7 +73,7 @@
                 text: username + ' has been logged in.'
             });
         };
-        socket.on('newMessage', function(message) {
+        socket.on('newMessage', (message) => {
             console.log(message);
         });
     </script>

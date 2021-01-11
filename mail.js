@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 
-async function sendMail() {
+const sendMail = async () => {
 
     let account = await nodemailer.createTestAccount();
 
