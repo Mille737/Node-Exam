@@ -25,8 +25,8 @@ MongoClient.connect(connectionUrl, {useNewUrlParser: true, useUnifiedTopology: t
                 });
             }
 
-            level_1.find().toArray(function(err , i) {
-                if (err) return console.log(err);
+            level_1.find().toArray((error , i) => {
+                if (error) return console.log(error);
                 res.render('level_1.ejs', {foundUsers: i});
             })
         });
